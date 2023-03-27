@@ -1,12 +1,23 @@
 import os
 import requests
+from pathlib import Path
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+def send_discord_message(webhook_url, message):
+    data = {"content": message}
+    response = requests.post(webhook_url, json=data)
+    if response.status_code != 204:
+        raise ValueError(f"Request to Discord returned an error: {response.status_code}, {response.text}")
+
 url = "https://www.fansale.fi/fansale/tickets/hard-amp-heavy/rammstein/188180/15753054"
+
+# Replace with your Discord webhook URL & user ID
+discord_webhook_url = "YOUR_DISCORD_WEBHOOK_URL"
+discord_user_id = "YOUR_DISCORD_USER_ID"
 
 options = Options()
 options.headless = True
@@ -34,7 +45,7 @@ except:
     new_data = [element.find_element(By.XPATH, './/div[2]/div[1]/span[1]').text for element in elements]
 
     # Read the existing data from the file
-    file_path = "data.txt"
+    file_path = str(Path(__file__).parent) + "/data.txt"
     if os.path.exists(file_path):
         with open(file_path, "r") as file:
             old_data = [line.strip() for line in file.readlines()]
@@ -47,7 +58,10 @@ except:
         with open(file_path, "w") as file:
             for data in new_data:
                 file.write(data + "\n")
-
+        
+        # Send a Discord message with the new data
+        message = f"<@{discord_user_id}> {new_data}\n\nhttps://www.fansale.fi/fansale/tickets/hard-amp-heavy/rammstein/188180/15753054"
+        send_discord_message(discord_webhook_url, message)
 
 # Close the WebDriver
 driver.quit()
