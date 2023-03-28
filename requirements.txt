@@ -1,3 +1,4 @@
 requests
 selenium
 pathlib
+python-dotenv
