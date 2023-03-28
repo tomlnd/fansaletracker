@@ -74,7 +74,7 @@ except:
                 file.write(data + "\n")
 
         # Send a Discord message with the new data
-        message = f"<@{discord_user_id}> {new_data}\n\nhttps://www.fansale.fi/fansale/tickets/hard-amp-heavy/rammstein/188180/15753054"
+        message = f"<@{discord_user_id}> {new_data}\n\n{url}"
         send_discord_message(discord_webhook_url, message)
 
 # Close the WebDriver
