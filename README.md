@@ -28,7 +28,7 @@ Run
 $ python3 fansale.py
 ```
 
-Using cron to run automatically every minute
+Using cron to run automatically once every minute
 
 ```sh
 $ crontab -e
