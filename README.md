@@ -16,10 +16,10 @@ $ python3 -m pip install -r requirements.txt
 
 Replace the values of `.env`
 
-```jsx
-FANSALE_URL = fansale_url;
-DISCORD_WEBHOOK_URL = your_discord_webhook_url;
-DISCORD_USER_ID = your_discord_user_id;
+```sh
+FANSALE_URL=fansale_url
+DISCORD_WEBHOOK_URL=your_discord_webhook_url
+DISCORD_USER_ID=your_discord_user_id
 ```
 
 Run
